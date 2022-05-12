@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<style>
+    .a1 {
+        color: red;
+    }
+</style>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("form").submit(function () {
+            var getUsername = $(".name").val();
+            var getEmail = $(".email").val();
+            var getPhone = $(".phone").val();
+            var getContact = $(".contact").val();
+            var flag = true;
+            if (getUsername == '') {
+                $(".error_name").text('Bạn Phải Nhập Username');
+                flag = false;
+            }
+            if (getEmail == '') {
+                $(".error_email").text('Bạn Phải Nhập Email');
+                flag = false;
+            }
+            if (getPhone == '') {
+                $(".error_phone").text('Bạn Phải Nhập Phone');
+                flag = false;
+            }
+            if (getContact == '') {
+                $(".error_contact").text('Bạn Phải Nhập Contact');
+                flag = false;
+            }
+            if (flag == true) {
+                // goi local ra va ktra xem localco gia tri chua,
+                // myobj = localStorage
+                // co thi add  them add.
+                // else var myobj ={};
+                if (localStorage.getItem("viewobj")) {
+                    text2 = localStorage.getItem("viewobj")
+                    myobj = JSON.parse(text2);
+                    
+                } else {
+                    myobj = {};
+                }
+                obj1 = {
+                    'Username': getUsername,
+                    'Email': getEmail,
+                    'Phone': getPhone,
+                    'contact': getContact
+                };
+                myobj[getUsername] = obj1;
+                myJSON = JSON.stringify(myobj);
+                localStorage.setItem("viewobj", myJSON);
+                console.log(myobj);
+                
+
+            }
+            return false;
+        });
+        function myFunction() {
+  document.getElementById("myForm").reset();
+}
+    })
+</script>
+
+
+<body>
+    <br>
+    <form action="" class="container" id="myform">
+        <span>User Name:</span><br>
+        <input type="text" name="" class="name form-control" value="">
+        <span class="error_name a1"></span>
+        <br>
+        <span>Email:</span><br>
+        <input type="text" name="" class="email form-control" value="">
+        <span class="error_email a1"></span>
+        <br>
+        <span>Phone:</span><br>
+        <input type="text" name="" class="phone form-control" value="">
+        <span class="error_phone a1"></span><br>
+        <span>Contact:</span><br>
+        <input type="text" name="" class="contact form-control" value="">
+        <span class="error_contact a1"></span>
+        <br><br>
+        <button type="submit" class="btn btn-outline-primary float-right" style="width: 50%;">Gủi</button>
+        <button type="button" class="btn btn-outline-primary" style="width: 50%;" onclick="myFunction()" value="Reset form">Delete</button>
+    </form>
+</body>
+
+</html>
